@@ -5,6 +5,13 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeLogUtil", "ChangeLogUtil\ChangeLogUtil.csproj", "{45F7BB23-9135-40A9-BE9D-238EC8BDEA18}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{9E431482-0E27-414A-86F2-1056A032F7BF}"
+	ProjectSection(SolutionItems) = preProject
+		TableComponents.sql = TableComponents.sql
+		Tables.sql = Tables.sql
+		Trigger.sql = Trigger.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
