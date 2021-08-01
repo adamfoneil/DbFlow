@@ -16,19 +16,17 @@ BEGIN
 	INSERT INTO @results (
 		[Type], [Name], [Position], [Definition]
 	) SELECT
-		'Column', [col].[name], [col].[column_id],
-		'<definition>' +
-			'<type>' + TYPE_NAME([col].[system_type_id]) + '</type>' +
-			'<length>' + CONVERT(varchar, [col].[max_length]) + '</length>' +
-			'<precision>' + CONVERT(varchar, [col].[precision]) + '</precision>' +
-			'<scale>' + CONVERT(varchar, [col].[scale]) + '</scale>' +
-			'<collation>' + ISNULL([col].[collation_name], '') + '</collation>' +
-			'<nullable>' + CASE [col].[is_nullable] WHEN 1 THEN 'true' ELSE 'false' END + '</nullable>' +
-			'<identity>' + CASE [col].[is_identity] WHEN 1 THEN 'true' ELSE 'false' END + '</identity>' +
-			'<computed>' + CASE [col].[is_computed] WHEN 1 THEN 'true' ELSE 'false' END + '</computed>' +
-			'<expression>' + ISNULL([ccol].[definition], '') + '</expression>' +
-			'<default>' + ISNULL([def].[definition], '') + '</default>' +
-		'</definition>'
+		'Column', [col].[name], [col].[column_id],		
+		'<type>' + TYPE_NAME([col].[system_type_id]) + '</type>' +
+		'<length>' + CONVERT(varchar, [col].[max_length]) + '</length>' +
+		'<precision>' + CONVERT(varchar, [col].[precision]) + '</precision>' +
+		'<scale>' + CONVERT(varchar, [col].[scale]) + '</scale>' +
+		'<collation>' + ISNULL([col].[collation_name], '') + '</collation>' +
+		'<nullable>' + CASE [col].[is_nullable] WHEN 1 THEN 'true' ELSE 'false' END + '</nullable>' +
+		'<identity>' + CASE [col].[is_identity] WHEN 1 THEN 'true' ELSE 'false' END + '</identity>' +
+		'<computed>' + CASE [col].[is_computed] WHEN 1 THEN 'true' ELSE 'false' END + '</computed>' +
+		'<expression>' + ISNULL([ccol].[definition], '') + '</expression>' +
+		'<default>' + ISNULL([def].[definition], '') + '</default>'		
 	FROM [sys].[columns] [col]
 	LEFT JOIN [sys].[computed_columns] [ccol] ON
 		[col].[object_id]=[ccol].[object_id] AND
@@ -43,18 +41,16 @@ BEGIN
 	INSERT INTO @results (
 		[Type], [Name], [Position], [Definition]
 	) SELECT
-		'Index', [ndx].[name], [ndx].[index_id],
-		'<definition>' +
-			'<type>' + CASE [ndx].[type] WHEN 1 THEN 'clustered' ELSE 'non-clustered' END + '</type>' +
-			'<unique>' + CASE [ndx].[is_unique] WHEN 1 THEN 'true' ELSE 'false' END + '</unique>' +
-			'<ignoreDups>' + CASE [ndx].[ignore_dup_key] WHEN 1 THEN 'true' ELSE 'false' END + '</ignoreDups>' +
-			'<primary>' + CASE [ndx].[is_primary_key] WHEN 1 THEN 'true' ELSE 'false' END + '</primary>' +
-			'<uniqueConstraint>' + CASE [ndx].[is_unique_constraint] WHEN 1 THEN 'true' ELSE 'false' END + '</uniqueConstraint>' +
-			'<disabled>' + CASE [ndx].[is_disabled] WHEN 1 THEN 'true' ELSE 'false' END + '</disabled>' +
-			'<padded>' + CASE [ndx].[is_padded] WHEN 1 THEN 'true' ELSE 'false' END + '</padded>' +
-			'<fillFactor>' + CONVERT(varchar, [ndx].[fill_factor]) + '</fillFactor>' +
-			'<filter>' + ISNULL([ndx].[filter_definition], '') + '</filter>' +
-		'</definition>'
+		'Index', [ndx].[name], [ndx].[index_id],		
+		'<type>' + CASE [ndx].[type] WHEN 1 THEN 'clustered' ELSE 'non-clustered' END + '</type>' +
+		'<unique>' + CASE [ndx].[is_unique] WHEN 1 THEN 'true' ELSE 'false' END + '</unique>' +
+		'<ignoreDups>' + CASE [ndx].[ignore_dup_key] WHEN 1 THEN 'true' ELSE 'false' END + '</ignoreDups>' +
+		'<primary>' + CASE [ndx].[is_primary_key] WHEN 1 THEN 'true' ELSE 'false' END + '</primary>' +
+		'<uniqueConstraint>' + CASE [ndx].[is_unique_constraint] WHEN 1 THEN 'true' ELSE 'false' END + '</uniqueConstraint>' +
+		'<disabled>' + CASE [ndx].[is_disabled] WHEN 1 THEN 'true' ELSE 'false' END + '</disabled>' +
+		'<padded>' + CASE [ndx].[is_padded] WHEN 1 THEN 'true' ELSE 'false' END + '</padded>' +
+		'<fillFactor>' + CONVERT(varchar, [ndx].[fill_factor]) + '</fillFactor>' +
+		'<filter>' + ISNULL([ndx].[filter_definition], '') + '</filter>'		
 	FROM
 		[sys].[indexes] [ndx]
 	WHERE
@@ -64,11 +60,9 @@ BEGIN
 	INSERT INTO @results (
 		[Type], [Name], [Parent], [Position], [Definition]
 	) SELECT
-		'IndexColumn', [col].[name], [x].[name], [xcol].[index_column_id], 
-		'<definition>' +
-			'<sort>' + CASE [xcol].[is_descending_key] WHEN 1 THEN 'DESC' ELSE 'ASC' END + '</sort>' +
-			'<included>' + CASE [xcol].[is_included_column] WHEN 1 THEN 'true' ELSE 'false' END + '</included>' +
-		'</definition>'
+		'IndexColumn', [col].[name], [x].[name], [xcol].[index_column_id], 		
+		'<sort>' + CASE [xcol].[is_descending_key] WHEN 1 THEN 'DESC' ELSE 'ASC' END + '</sort>' +
+		'<included>' + CASE [xcol].[is_included_column] WHEN 1 THEN 'true' ELSE 'false' END + '</included>'		
 	FROM 
 		[sys].[index_columns] [xcol]
 		INNER JOIN [sys].[indexes] [x] ON 
@@ -85,13 +79,11 @@ BEGIN
 	INSERT INTO @results (
 		[Name], [Type], [Definition]
 	) SELECT				
-		[fk].[name], 'ForeignKey',
-		'<definition>' +
-			'<referencedSchema>' + SCHEMA_NAME([ref_t].[schema_id]) + '</referencedSchema>' +
-			'<referencedTable>' + [ref_t].[name] + '</referencedTable>' +
-			'<cascadeDelete>' + CASE [fk].[delete_referential_action] WHEN 1 THEN 'true' ELSE 'false' END + '</cascadeDelete>' +
-			'<cascadeUpdate>' + CASE [fk].[update_referential_action] WHEN 1 THEN 'true' ELSE 'false' END + '</cascadeUpdate>' +
-		'</definition>'
+		[fk].[name], 'ForeignKey',		
+		'<referencedSchema>' + SCHEMA_NAME([ref_t].[schema_id]) + '</referencedSchema>' +
+		'<referencedTable>' + [ref_t].[name] + '</referencedTable>' +
+		'<cascadeDelete>' + CASE [fk].[delete_referential_action] WHEN 1 THEN 'true' ELSE 'false' END + '</cascadeDelete>' +
+		'<cascadeUpdate>' + CASE [fk].[update_referential_action] WHEN 1 THEN 'true' ELSE 'false' END + '</cascadeUpdate>'
 	FROM
 		[sys].[foreign_keys] [fk]
 		INNER JOIN [sys].[tables] [ref_t] ON [fk].[referenced_object_id]=[ref_t].[object_id]
@@ -103,10 +95,8 @@ BEGIN
 	INSERT INTO @results (
 		[Type], [Name], [Parent], [Position], [Definition]
 	) SELECT					
-		'ForeignKeyColumn', [child_col].[name], [fk].[name], [fkcol].[constraint_column_id],
-		'<definition>' +
-			'<referencedColumn>' + [ref_col].[name] + '</referencedColumn>' +
-		'</definition>'		
+		'ForeignKeyColumn', [child_col].[name], [fk].[name], [fkcol].[constraint_column_id],		
+		'<referencedColumn>' + [ref_col].[name] + '</referencedColumn>'		
 	FROM
 		[sys].[foreign_key_columns] [fkcol]
 		INNER JOIN [sys].[foreign_keys] [fk] ON [fkcol].[constraint_object_id]=[fk].[object_id]
@@ -125,10 +115,8 @@ BEGIN
 	INSERT INTO @results (
 		[Type], [Name], [Definition]
 	) SELECT
-		'CheckConstraint', [ck].[name] AS [Name],
-		'<definition>' +
-			'<expression>' + [ck].[definition] + '</expression>' +
-		'</definition>'
+		'CheckConstraint', [ck].[name] AS [Name],		
+		'<expression>' + [ck].[definition] + '</expression>'		
 	FROM
 		[sys].[check_constraints] [ck]
 	WHERE
