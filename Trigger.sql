@@ -19,31 +19,34 @@ BEGIN
 	SET @version = 0
 END
 
--- increment version for next change
-UPDATE [obj] SET [Version]=[Version]+1
-FROM [changelog].[Object] [obj]
-WHERE [Schema]=@schema AND [Name]=@objectName
-
 DECLARE @eventType nvarchar(100), @userName nvarchar(50), @script nvarchar(max)
 SET @eventType = @data.value('(/EVENT_INSTANCE/EventType)[1]', 'nvarchar(100)')
 SET @userName = @data.value('(/EVENT_INSTANCE/UserName)[1]', 'nvarchar(50)')
 SET @script = @data.value('(/EVENT_INSTANCE/TSQLCommand)[1]', 'nvarchar(max)')  
 
-INSERT INTO [changelog].[Event] (
-	[EventType], [UserName], [Schema], [ObjectName], [Script], [Version]
-) VALUES (
-	@eventType, @userName, @schema, @objectName, @script, @version
-)
-
-DECLARE @eventId int
-SET @eventId = SCOPE_IDENTITY()
-
-IF @objectType = 'TABLE'
+IF @eventType NOT LIKE 'DROP%'
 BEGIN
-	DECLARE @tableDef xml
-	SET @tableDef = (SELECT * FROM [changelog].[TableComponents](@schema, @objectName) FOR XML AUTO)
+	-- increment version for next change
+	UPDATE [obj] SET [Version]=[Version]+1
+	FROM [changelog].[Object] [obj]
+	WHERE [Schema]=@schema AND [Name]=@objectName	
 
-	INSERT INTO [changelog].[Table] ([EventId], [Xml]) 
-	VALUES (@eventId, @tableDef)
+	INSERT INTO [changelog].[Event] (
+		[EventType], [UserName], [Schema], [ObjectName], [Script], [Version]
+	) VALUES (
+		@eventType, @userName, @schema, @objectName, @script, @version
+	)
+
+	DECLARE @eventId int
+	SET @eventId = SCOPE_IDENTITY()
+
+	IF @objectType = 'TABLE'
+	BEGIN
+		DECLARE @tableDef xml
+		SET @tableDef = (SELECT * FROM [changelog].[TableComponents](@schema, @objectName) FOR XML AUTO)
+
+		INSERT INTO [changelog].[Table] ([EventId], [Xml]) 
+		VALUES (@eventId, @tableDef)
+	END
 END
 GO

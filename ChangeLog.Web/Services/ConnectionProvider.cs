@@ -20,6 +20,5 @@ namespace ChangeLog.Web.Services
         public IEnumerable<string> ConnectionNames => _connections.Select(kp => kp.Key);
 
         public IDbConnection GetConnection(string name) => new SqlConnection(_connections[name]);
-
     }
 }
