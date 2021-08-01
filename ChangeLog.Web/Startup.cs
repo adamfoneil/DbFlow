@@ -1,3 +1,4 @@
+using ChangeLog.Services;
 using ChangeLog.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,8 @@ namespace ChangeLog.Web
         {
             services.AddRazorPages();
             services.AddSingleton(new ConnectionProvider(Configuration));
-            services.AddScoped<TableDefRenderer>();            
+            services.AddScoped<TableDefRenderer>();
+            services.AddScoped<ChangeLogRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

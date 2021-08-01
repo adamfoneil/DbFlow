@@ -11,7 +11,23 @@
 <div id="main">
     <nav class="m-3">
         <form method="get">
-            @Html.DropDownList("ConnectionName", Model.ConnectionSelect, string.Empty, new { @class = "form-control"})
+            @Html.DropDownList("connection", Model.ConnectionSelect, string.Empty, new { @class = "form-control", onchange = "this.form.submit()" })
+
+            @if (Model.RecentObjects != null)
+            {
+                <ul>
+                    @foreach (var obj in Model.RecentObjects)
+                    {
+                        <li>
+                            <a href="?eventId=@obj.LastEventId&connection=@Model.Connection">@obj.DisplayName</a>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Please choose a connection</p>
+            }
         </form>
     </nav>
     <article class="m-3">
