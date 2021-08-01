@@ -29,6 +29,7 @@ GO
 CREATE TABLE [changelog].[Table] (
 	[Id] int identity(1,1) PRIMARY KEY,
 	[EventId] int NOT NULL,
-	[Definition] nvarchar(max) NOT NULL,
+	[Xml] xml NOT NULL,
+	[Text] nvarchar(max) NULL,
 	CONSTRAINT [FK_changelogTable_EventId] FOREIGN KEY ([EventId]) REFERENCES [changelog].[Event] ([Id])
 )

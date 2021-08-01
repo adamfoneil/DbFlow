@@ -40,10 +40,10 @@ SET @eventId = SCOPE_IDENTITY()
 
 IF @objectType = 'TABLE'
 BEGIN
-	DECLARE @tableDef nvarchar(max)
-	-- todo: get table def from CLR function
+	DECLARE @tableDef xml
+	SET @tableDef = (SELECT * FROM [changelog].[TableComponents]('dbo', 'Appointment') FOR XML AUTO)
 
-	INSERT INTO [changelog].[Table] ([EventId], [Definition]) 
+	INSERT INTO [changelog].[Table] ([EventId], [Xml]) 
 	VALUES (@eventId, @tableDef)
 END
 GO
