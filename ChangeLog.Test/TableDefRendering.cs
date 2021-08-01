@@ -1,4 +1,4 @@
-using ChangeLog.Web.Services;
+using ChangeLog.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Reflection;

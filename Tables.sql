@@ -31,5 +31,6 @@ CREATE TABLE [changelog].[Table] (
 	[EventId] int NOT NULL,
 	[Xml] xml NOT NULL,
 	[Text] nvarchar(max) NULL,
-	CONSTRAINT [FK_changelogTable_EventId] FOREIGN KEY ([EventId]) REFERENCES [changelog].[Event] ([Id])
+	CONSTRAINT [FK_changelogTable_EventId] FOREIGN KEY ([EventId]) REFERENCES [changelog].[Event] ([Id]),
+	CONSTRAINT [U_changelogTable_EventId] UNIQUE ([EventId])
 )

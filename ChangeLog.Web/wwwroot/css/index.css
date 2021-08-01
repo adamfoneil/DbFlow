@@ -7,5 +7,10 @@
 }
 
 #main article {
-    width:100%
+    width:100%;
+    display:flex
+}
+
+#main article div {
+    width:50%
 }

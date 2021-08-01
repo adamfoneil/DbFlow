@@ -41,7 +41,7 @@ SET @eventId = SCOPE_IDENTITY()
 IF @objectType = 'TABLE'
 BEGIN
 	DECLARE @tableDef xml
-	SET @tableDef = (SELECT * FROM [changelog].[TableComponents]('dbo', 'Appointment') FOR XML AUTO)
+	SET @tableDef = (SELECT * FROM [changelog].[TableComponents](@schema, @objectName) FOR XML AUTO)
 
 	INSERT INTO [changelog].[Table] ([EventId], [Xml]) 
 	VALUES (@eventId, @tableDef)

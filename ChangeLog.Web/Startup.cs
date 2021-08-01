@@ -21,8 +21,7 @@ namespace ChangeLog.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton(new ConnectionProvider(Configuration));
-            services.AddScoped<TableDefRenderer>();
+            services.AddSingleton(new ConnectionProvider(Configuration));            
             services.AddScoped<ChangeLogRepository>();
         }
 

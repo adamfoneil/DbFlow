@@ -12,26 +12,57 @@
     <nav class="m-3">
         <form method="get">
             @Html.DropDownList("connection", Model.ConnectionSelect, string.Empty, new { @class = "form-control", onchange = "this.form.submit()" })
+        </form>
 
+        <div class="mt-3">
             @if (Model.RecentObjects != null)
             {
-                <ul>
-                    @foreach (var obj in Model.RecentObjects)
+                @foreach (var typeGrp in Model.RecentObjects.GroupBy(row => row.Type))
+                {
+                    <h6>@typeGrp.Key</h6>
+                    <ul>
+                    @foreach (var obj in typeGrp)
                     {
                         <li>
-                            <a href="?eventId=@obj.LastEventId&connection=@Model.Connection">@obj.DisplayName</a>
+                            <a href="?objectId=@obj.Id&connection=@Model.Connection">@obj.DisplayName</a>
+                            @if (Model.ObjectId == obj.Id)
+                            {
+                                <ul>
+                                    @foreach (var ev in Model.EventComparison)
+                                    {
+                                        <li>
+                                            <a href="?objectId=@obj.Id&connection=@Model.Connection&priorEventId=@ev.PriorEventId&currentEventId=@ev.CurrentEventId">@ev.CurrentTimestamp | version @ev.CurrentVersion</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
                         </li>
                     }
-                </ul>
+                    </ul>
+                }                
             }
             else
             {
                 <p>Please choose a connection</p>
             }
-        </form>
+        </div>
     </nav>
-    <article class="m-3">
-        <p>This is the main body</p>
+
+    <article class="m-3" id="comparison-view">
+        @if (Model.PriorEvent != null && Model.CurrentEvent != null)
+        {
+            <div>
+                <partial name="_EventView" model="Model.PriorEvent"/>
+            </div>
+
+            <div>
+                <partial name="_EventView" model="Model.CurrentEvent"/>
+            </div>
+        }
+        else
+        {
+            <p>Please select a change event.</p>
+        }
     </article>
 </div>
 

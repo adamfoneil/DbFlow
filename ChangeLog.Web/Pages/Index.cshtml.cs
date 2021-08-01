@@ -12,17 +12,15 @@ namespace ChangeLog.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-        private readonly TableDefRenderer _renderer;
+        private readonly ILogger<IndexModel> _logger;        
         private readonly ConnectionProvider _connector;
         private readonly ChangeLogRepository _repository;
 
         public IndexModel(
             ILogger<IndexModel> logger, 
-            TableDefRenderer renderer, ConnectionProvider connector, ChangeLogRepository repository)
+            ConnectionProvider connector, ChangeLogRepository repository)
         {
-            _logger = logger;
-            _renderer = renderer;
+            _logger = logger;            
             _connector = connector;
             _repository = repository;
         }
@@ -31,11 +29,22 @@ namespace ChangeLog.Web.Pages
         public string Connection { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public int EventId { get; set; }
+        public int ObjectId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int PriorEventId { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int CurrentEventId { get; set; }
 
         public SelectList ConnectionSelect { get; set; }
 
         public IEnumerable<RecentObjectsResult> RecentObjects { get; set; }
+
+        public IEnumerable<EventsComparedResult> EventComparison { get; set; }
+
+        public EventViewResult PriorEvent { get; set; }
+        public EventViewResult CurrentEvent { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -46,7 +55,22 @@ namespace ChangeLog.Web.Pages
                 using (var cn = _connector.GetConnection(Connection))
                 {
                     RecentObjects = await _repository.GetRecentObjectsAsync(cn);
-                }                
+
+                    if (ObjectId != default)
+                    {
+                        EventComparison = await _repository.GetEventComparisonAsync(cn, ObjectId);
+                    }
+
+                    if (PriorEventId != default)
+                    {
+                        PriorEvent = await _repository.GetEventViewAsync(cn, PriorEventId);
+                    }
+
+                    if (CurrentEventId != default)
+                    {
+                        CurrentEvent = await _repository.GetEventViewAsync(cn, CurrentEventId);
+                    }
+                }   
             }
         }
     }
