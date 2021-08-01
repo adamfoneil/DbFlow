@@ -37,9 +37,9 @@ namespace ChangeLogUtil
                 var byType = data.AsEnumerable().ToLookup(row => row.Field<string>("Type"));
                 var byParent = data.AsEnumerable().Where(row => !row.IsNull("Parent")).ToLookup(row => row.Field<string>("Parent"));
 
-                AddItems(output, "Columns:", byType["Column"], (xml, children) => ParseColumnDef(xml, children));
-                AddItems(output, "Foreign Keys:", byType["ForeignKey"], (xml, children) => ParseForeignKeyDef(xml, children), byParent);
-                AddItems(output, "Indexes:", byType["Index"], (xml, children) => ParseIndexDef(xml, children), byParent);
+                AddItems(output, "Columns", byType["Column"], (xml, children) => ParseColumnDef(xml, children));
+                AddItems(output, "Foreign Keys", byType["ForeignKey"], (xml, children) => ParseForeignKeyDef(xml, children), byParent);
+                AddItems(output, "Indexes", byType["Index"], (xml, children) => ParseIndexDef(xml, children), byParent);
                 //AddItems(output, "Check Constraints:", byType["CheckConstraint"], (xml, children) => ParseCheckDef(xml, children));
 
                 return output.ToString();
@@ -52,13 +52,13 @@ namespace ChangeLogUtil
             Func<string, IEnumerable<DataRow>, string> parseDefinition, 
             ILookup<string, DataRow> byParent = null)
         {
-            output.AppendLine(heading);
+            output.AppendLine($"{heading} ({componentRows.Count()})");
 
             foreach (var row in componentRows.OrderBy(row => row.Field<int?>("Position")))
             {
                 var name = row.Field<string>("Name");
                 var childRows = byParent?.Contains(name) ?? false ? byParent[name] : Enumerable.Empty<DataRow>();
-                output.AppendLine($"  {name} {parseDefinition(row.Field<string>("Definition"), childRows)}");
+                output.AppendLine($"  [{name}] {parseDefinition(row.Field<string>("Definition"), childRows)}");
             }
 
             output.AppendLine();
@@ -68,45 +68,54 @@ namespace ChangeLogUtil
         {
             var properties = xml.ToDictionary();
 
-            var rules = new Dictionary<Func<string, bool>, IEnumerable<string>>()
+            string result = string.Empty;
+
+            if (properties["computed"].Equals("true"))
             {
-                [(type) => type.Contains("var")] = new string[]
+                result = $"= {properties["expression"]} ";
+            }
+
+            result += properties["type"];
+
+            bool isChar = false;
+            if (properties["type"].Contains("char"))
+            {
+                isChar = true;
+                int length = int.Parse(properties["length"]);
+                if (length > 0)
                 {
-                    "length"
-                },
-                [(type) => type.Contains("char")] = new string[]
-                {
-                    "length",
-                    "collation"
-                },
-                [(type) => type.Equals("decimal")] = new string[]
-                {
-                    "precision",
-                    "scale"
-                },
-                [(type) => type.Contains("int")] = new string[]
-                {
-                    "identity"
+                    int divisor = (properties["type"].StartsWith("n")) ? 2 : 1;
+                    result += $"({length / divisor})";
                 }
-            };
+                else
+                {
+                    result += "(max)";
+                }
+            }
+            else if (properties["type"].Equals("decimal"))
+            {
+                result += $"({properties["precision"]}, {properties["scale"]})";
+            }
 
-            var typeSpecificProps = properties
-                .Where(prop_kp => rules.Any(rule_kp => rule_kp.Key.Invoke(prop_kp.Key)))
-                .Select(kp => kp.Key)
-                .ToArray();
+            if (properties["identity"].Equals("true"))
+            {
+                result += " identity";
+            }
+            
+            var nullable = (properties["nullable"].Equals("true")) ? "NULL" : "NOT NULL";
+            result += " " + nullable;
 
-            var allTypeSpecificProps = rules
-                .SelectMany(kp => kp.Value)
-                .Distinct()
-                .ToArray();
+            if (isChar)
+            {
+                result += $" ({properties["collation"]})";
+            }
 
-            var returnProps = properties
-                .Select(kp => kp.Key)
-                .Except(allTypeSpecificProps)
-                .Concat(typeSpecificProps)
-                .ToArray();
+            if (properties.ContainsKey("default"))
+            {
+                result += $" default = {properties["default"]}";
+            }
 
-            return properties.ToText(returnProps);
+            return result;
         }
 
         private static string ParseForeignKeyDef(string xml, IEnumerable<DataRow> childRows)
