@@ -13,9 +13,9 @@ namespace ChangeLog.Web.Services
         /// to a more readable text format for diff display        
         /// </summary>
         public string AsText(string xml)
-        {
+        {            
             var doc = XDocument.Parse("<root>" + xml + "</root>");
-            var tableComponents = doc.Root.Descendants().Select(ele => 
+            var tableComponents = doc.Root.Elements().Select(ele => 
             {
                 var props = ElementDictionary(ele);
                 return new TableComponentResult()
@@ -26,7 +26,7 @@ namespace ChangeLog.Web.Services
                     Position = int.TryParse(ele.Attribute("Position")?.Value, out int position) ? position : default,
                     Definition = ElementDictionary(ele.Element("Definition"))
                 };
-            });
+            }).ToArray();
 
             var output = new StringBuilder();
 

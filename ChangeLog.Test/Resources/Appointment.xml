@@ -1,0 +1,258 @@
+﻿<changelog.TableComponents Type="Column" Name="Id" Position="1">
+  <Definition>
+    <type>int</type>
+    <length>4</length>
+    <precision>10</precision>
+    <scale>0</scale>
+    <collation />
+    <nullable>false</nullable>
+    <identity>true</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="LocationId" Position="2">
+  <Definition>
+    <type>int</type>
+    <length>4</length>
+    <precision>10</precision>
+    <scale>0</scale>
+    <collation />
+    <nullable>false</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="TypeId" Position="3">
+  <Definition>
+    <type>int</type>
+    <length>4</length>
+    <precision>10</precision>
+    <scale>0</scale>
+    <collation />
+    <nullable>false</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="OwnerClientId" Position="4">
+  <Definition>
+    <type>int</type>
+    <length>4</length>
+    <precision>10</precision>
+    <scale>0</scale>
+    <collation />
+    <nullable>true</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="VolumeClientId" Position="5">
+  <Definition>
+    <type>int</type>
+    <length>4</length>
+    <precision>10</precision>
+    <scale>0</scale>
+    <collation />
+    <nullable>true</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Date" Position="6">
+  <Definition>
+    <type>date</type>
+    <length>3</length>
+    <precision>10</precision>
+    <scale>0</scale>
+    <collation />
+    <nullable>false</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Time" Position="7">
+  <Definition>
+    <type>time</type>
+    <length>5</length>
+    <precision>16</precision>
+    <scale>7</scale>
+    <collation />
+    <nullable>true</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Points" Position="8">
+  <Definition>
+    <type>int</type>
+    <length>4</length>
+    <precision>10</precision>
+    <scale>0</scale>
+    <collation />
+    <nullable>true</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Comments" Position="9">
+  <Definition>
+    <type>nvarchar</type>
+    <length>510</length>
+    <precision>0</precision>
+    <scale>0</scale>
+    <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+    <nullable>true</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="CreatedBy" Position="10">
+  <Definition>
+    <type>nvarchar</type>
+    <length>100</length>
+    <precision>0</precision>
+    <scale>0</scale>
+    <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+    <nullable>false</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="DateCreated" Position="11">
+  <Definition>
+    <type>datetime</type>
+    <length>8</length>
+    <precision>23</precision>
+    <scale>3</scale>
+    <collation />
+    <nullable>false</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="ModifiedBy" Position="12">
+  <Definition>
+    <type>nvarchar</type>
+    <length>100</length>
+    <precision>0</precision>
+    <scale>0</scale>
+    <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+    <nullable>true</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="DateModified" Position="13">
+  <Definition>
+    <type>datetime</type>
+    <length>8</length>
+    <precision>23</precision>
+    <scale>3</scale>
+    <collation />
+    <nullable>true</nullable>
+    <identity>false</identity>
+    <computed>false</computed>
+    <expression />
+    <default />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Index" Name="PK_Appointment" Position="1">
+  <Definition>
+    <type>clustered</type>
+    <unique>true</unique>
+    <ignoreDups>false</ignoreDups>
+    <primary>true</primary>
+    <uniqueConstraint>false</uniqueConstraint>
+    <disabled>false</disabled>
+    <padded>false</padded>
+    <fillFactor>0</fillFactor>
+    <filter />
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="IndexColumn" Parent="PK_Appointment" Name="Id" Position="1">
+  <Definition>
+    <sort>ASC</sort>
+    <included>false</included>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKey" Name="FK_Appointment_TypeId">
+  <Definition>
+    <referencedSchema>dbo</referencedSchema>
+    <referencedTable>AppointmentType</referencedTable>
+    <cascadeDelete>false</cascadeDelete>
+    <cascadeUpdate>false</cascadeUpdate>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKey" Name="FK_Appointment_OwnerClientId">
+  <Definition>
+    <referencedSchema>dbo</referencedSchema>
+    <referencedTable>Client</referencedTable>
+    <cascadeDelete>false</cascadeDelete>
+    <cascadeUpdate>false</cascadeUpdate>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKey" Name="FK_Appointment_VolumeClientId">
+  <Definition>
+    <referencedSchema>dbo</referencedSchema>
+    <referencedTable>Client</referencedTable>
+    <cascadeDelete>false</cascadeDelete>
+    <cascadeUpdate>false</cascadeUpdate>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKey" Name="FK_Appointment_LocationId">
+  <Definition>
+    <referencedSchema>dbo</referencedSchema>
+    <referencedTable>Location</referencedTable>
+    <cascadeDelete>false</cascadeDelete>
+    <cascadeUpdate>false</cascadeUpdate>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKeyColumn" Parent="FK_Appointment_LocationId" Name="LocationId" Position="1">
+  <Definition>
+    <referencedColumn>Id</referencedColumn>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKeyColumn" Parent="FK_Appointment_TypeId" Name="TypeId" Position="1">
+  <Definition>
+    <referencedColumn>Id</referencedColumn>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKeyColumn" Parent="FK_Appointment_OwnerClientId" Name="OwnerClientId" Position="1">
+  <Definition>
+    <referencedColumn>Id</referencedColumn>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKeyColumn" Parent="FK_Appointment_VolumeClientId" Name="VolumeClientId" Position="1">
+  <Definition>
+    <referencedColumn>Id</referencedColumn>
+  </Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="CheckConstraint" Name="CK_Appointment_Client">
+  <Definition>
+    <expression>(NOT ([OwnerClientId] IS NULL AND [VolumeClientId] IS NULL))</expression>
+  </Definition>
+</changelog.TableComponents>

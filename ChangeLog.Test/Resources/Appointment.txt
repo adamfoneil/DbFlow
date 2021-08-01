@@ -1,0 +1,32 @@
+﻿Columns (13):
+  [Id] int identity NOT NULL
+  [LocationId] int NOT NULL
+  [TypeId] int NOT NULL
+  [OwnerClientId] int NULL
+  [VolumeClientId] int NULL
+  [Date] date NOT NULL
+  [Time] time NULL
+  [Points] int NULL
+  [Comments] nvarchar(255) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [CreatedBy] nvarchar(50) NOT NULL (SQL_Latin1_General_CP1_CI_AS)
+  [DateCreated] datetime NOT NULL
+  [ModifiedBy] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [DateModified] datetime NULL
+
+Foreign Keys (4):
+  [FK_Appointment_TypeId] => dbo.AppointmentType
+    TypeId => Id
+  [FK_Appointment_OwnerClientId] => dbo.Client
+    OwnerClientId => Id
+  [FK_Appointment_VolumeClientId] => dbo.Client
+    VolumeClientId => Id
+  [FK_Appointment_LocationId] => dbo.Location
+    LocationId => Id
+
+Indexes (1):
+  [PK_Appointment] primary clustered
+    Id ASC
+
+Check Constraints: (1):
+  [CK_Appointment_Client] (NOT ([OwnerClientId] IS NULL AND [VolumeClientId] IS NULL))
+

@@ -1,11 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SqlServer.LocalDb;
-using System;
-using System.Diagnostics;
+using ChangeLog.Web.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Reflection;
 
-namespace ChangeLogUtil.Test
+namespace ChangeLog.Test
 {
     [TestClass]
     public class TableDefs
@@ -13,8 +11,11 @@ namespace ChangeLogUtil.Test
         [TestMethod]
         public void Appointment()
         {
-            var xml = GetResource("Resources.Appointment.xml");
-            var service = new TableDefXmlRenderer();
+            var xml = GetResource("ChangeLog.Test.Resources.Appointment.xml");
+            var renderer = new TableDefXmlRenderer();
+            var actual = renderer.AsText(xml);
+            var expected = GetResource("ChangeLog.Test.Resources.Appointment.txt");
+            Assert.IsTrue(actual.Equals(expected));
         }
 
         private string GetResource(string name)
