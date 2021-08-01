@@ -40,7 +40,7 @@ namespace ChangeLogUtil
                 AddItems(output, "Columns", byType["Column"], (xml, children) => ParseColumnDef(xml, children));
                 AddItems(output, "Foreign Keys", byType["ForeignKey"], (xml, children) => ParseForeignKeyDef(xml, children), byParent);
                 AddItems(output, "Indexes", byType["Index"], (xml, children) => ParseIndexDef(xml, children), byParent);
-                //AddItems(output, "Check Constraints:", byType["CheckConstraint"], (xml, children) => ParseCheckDef(xml, children));
+                AddItems(output, "Check Constraints:", byType["CheckConstraint"], (xml, children) => ParseCheckDef(xml, children));
 
                 return output.ToString();
             }
@@ -149,20 +149,42 @@ namespace ChangeLogUtil
         {
             var properties = xml.ToDictionary();
 
-            var result = properties.ToText();
+            var result =
+                (properties["primary"].Equals("true")) ? "primary" :
+                (properties["uniqueConstraint"].Equals("true")) ? "unique constraint" :
+                (properties["unique"].Equals("true")) ? "unique" :
+                string.Empty;
+            
+            result += (properties["type"].Equals("clustered")) ? " clustered" : " nonclustered";
+            
+            if (properties["disabled"].Equals("true"))
+            {
+                result += " DISABLED";
+            }
 
-            result += string.Join("\r\n", childRows.Select(row =>
+            if (properties["ignoreDups"].Equals("true"))
+            {
+                result += " ignore dups";
+            }
+
+            // todo: fill factor + padding
+
+            result += "\r\n";
+
+            foreach (var row in childRows)
             {
                 var colProps = row.Field<string>("Definition").ToDictionary();
-                return $"{row.Field<string>("Name")} {colProps["sort"]}";
-            }));
+                result += $"    {row.Field<string>("Name")} {colProps["sort"]}";
+            }
 
             return result;
         }
 
         private static string ParseCheckDef(string xml, IEnumerable<DataRow> childRows)
         {
-            throw new NotImplementedException();
+            var properties = xml.ToDictionary();
+
+            return properties["expression"];
         }
 
         private static Dictionary<string, string> ToDictionary(this string xml) =>
@@ -170,10 +192,5 @@ namespace ChangeLogUtil
             .Descendants()
             .Where(ele => !ele.IsEmpty)
             .ToDictionary(ele => ele.Name.LocalName, ele => ele.Value);
-
-        private static string ToText(this IDictionary<string, string> dictionary, IEnumerable<string> includeKeys = null) =>
-            string.Join("\r\n", dictionary
-                .Where(kp => includeKeys?.Contains(kp.Key) ?? true)
-                .Select(kp => $"    {kp.Key} = {kp.Value}"));
     }
 }

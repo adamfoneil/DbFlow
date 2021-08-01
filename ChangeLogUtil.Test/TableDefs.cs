@@ -18,6 +18,9 @@ namespace ChangeLogUtil.Test
         public void Hs5PatientItem() => ExecuteHs5("dbo", "PatientItem");
 
         [TestMethod]
+        public void Hs5Appointment() => ExecuteHs5("dbo", "Appointment");
+
+        [TestMethod]
         public void BlazorAOEvent() => ExecuteBlazorAO("changelog", "Event");
 
         private void ExecuteHs5(string schema, string name) => ExecuteInner("Hs5", schema, name);        
