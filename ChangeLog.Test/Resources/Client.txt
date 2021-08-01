@@ -1,0 +1,38 @@
+﻿Columns (24):
+  [Id] int identity NOT NULL
+  [ClinicId] int NOT NULL
+  [Name] nvarchar(100) NOT NULL (SQL_Latin1_General_CP1_CI_AS)
+  [LastName] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [FirstName] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [StreetAddress] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [City] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [PostalCode] nvarchar(20) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [County] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [Email] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [Phone1] nvarchar(20) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [Phone2] nvarchar(20) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [FeeScheduleId] int NOT NULL
+  [Balance] money NOT NULL
+  [CreatedBy] nvarchar(50) NOT NULL (SQL_Latin1_General_CP1_CI_AS)
+  [DateCreated] datetime NOT NULL
+  [ModifiedBy] nvarchar(50) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [DateModified] datetime NULL
+  [IsRedFlag] bit NOT NULL
+  [Comments] nvarchar(max) NULL (SQL_Latin1_General_CP1_CI_AS)
+  [RecalcBalance] bit NOT NULL
+  [MaySendEmail] bit NOT NULL
+  [MaySendTexts] bit NOT NULL
+  [StateOrProvince] nvarchar(2) NULL (SQL_Latin1_General_CP1_CI_AS)
+
+Foreign Keys (2):
+  [FK_Client_ClinicId] => dbo.Clinic
+    ClinicId => Id
+  [FK_Client_FeeScheduleId] => dbo.FeeSchedule
+    FeeScheduleId => Id
+
+Indexes (1):
+  [PK_Client] primary clustered
+    Id ASC
+
+Check Constraints: (0):
+

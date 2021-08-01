@@ -1,0 +1,381 @@
+﻿<changelog.TableComponents Type="Column" Name="Id" Position="1">
+<Definition>
+  <type>int</type>
+  <length>4</length>
+  <precision>10</precision>
+  <scale>0</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>true</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="ClinicId" Position="2">
+<Definition>
+  <type>int</type>
+  <length>4</length>
+  <precision>10</precision>
+  <scale>0</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Name" Position="3">
+<Definition>
+  <type>nvarchar</type>
+  <length>200</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="LastName" Position="4">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="FirstName" Position="5">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="StreetAddress" Position="6">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="City" Position="7">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="PostalCode" Position="9">
+<Definition>
+  <type>nvarchar</type>
+  <length>40</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="County" Position="10">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Email" Position="11">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Phone1" Position="12">
+<Definition>
+  <type>nvarchar</type>
+  <length>40</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Phone2" Position="13">
+<Definition>
+  <type>nvarchar</type>
+  <length>40</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="FeeScheduleId" Position="14">
+<Definition>
+  <type>int</type>
+  <length>4</length>
+  <precision>10</precision>
+  <scale>0</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Balance" Position="15">
+<Definition>
+  <type>money</type>
+  <length>8</length>
+  <precision>19</precision>
+  <scale>4</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="CreatedBy" Position="16">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="DateCreated" Position="17">
+<Definition>
+  <type>datetime</type>
+  <length>8</length>
+  <precision>23</precision>
+  <scale>3</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="ModifiedBy" Position="18">
+<Definition>
+  <type>nvarchar</type>
+  <length>100</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="DateModified" Position="19">
+<Definition>
+  <type>datetime</type>
+  <length>8</length>
+  <precision>23</precision>
+  <scale>3</scale>
+  <collation />
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="IsRedFlag" Position="20">
+<Definition>
+  <type>bit</type>
+  <length>1</length>
+  <precision>1</precision>
+  <scale>0</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="Comments" Position="21">
+<Definition>
+  <type>nvarchar</type>
+  <length>-1</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="RecalcBalance" Position="22">
+<Definition>
+  <type>bit</type>
+  <length>1</length>
+  <precision>1</precision>
+  <scale>0</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="MaySendEmail" Position="23">
+<Definition>
+  <type>bit</type>
+  <length>1</length>
+  <precision>1</precision>
+  <scale>0</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="MaySendTexts" Position="24">
+<Definition>
+  <type>bit</type>
+  <length>1</length>
+  <precision>1</precision>
+  <scale>0</scale>
+  <collation />
+  <nullable>false</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Column" Name="StateOrProvince" Position="25">
+<Definition>
+  <type>nvarchar</type>
+  <length>4</length>
+  <precision>0</precision>
+  <scale>0</scale>
+  <collation>SQL_Latin1_General_CP1_CI_AS</collation>
+  <nullable>true</nullable>
+  <identity>false</identity>
+  <computed>false</computed>
+  <expression />
+  <default />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="Index" Name="PK_Client" Position="1">
+<Definition>
+  <type>clustered</type>
+  <unique>true</unique>
+  <ignoreDups>false</ignoreDups>
+  <primary>true</primary>
+  <uniqueConstraint>false</uniqueConstraint>
+  <disabled>false</disabled>
+  <padded>false</padded>
+  <fillFactor>0</fillFactor>
+  <filter />
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="IndexColumn" Parent="PK_Client" Name="Id" Position="1">
+<Definition>
+  <sort>ASC</sort>
+  <included>false</included>
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKey" Name="FK_Client_ClinicId">
+<Definition>
+  <referencedSchema>dbo</referencedSchema>
+  <referencedTable>Clinic</referencedTable>
+  <cascadeDelete>false</cascadeDelete>
+  <cascadeUpdate>false</cascadeUpdate>
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKey" Name="FK_Client_FeeScheduleId">
+<Definition>
+  <referencedSchema>dbo</referencedSchema>
+  <referencedTable>FeeSchedule</referencedTable>
+  <cascadeDelete>false</cascadeDelete>
+  <cascadeUpdate>false</cascadeUpdate>
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKeyColumn" Parent="FK_Client_ClinicId" Name="ClinicId" Position="1">
+<Definition>
+  <referencedColumn>Id</referencedColumn>
+</Definition>
+</changelog.TableComponents>
+<changelog.TableComponents Type="ForeignKeyColumn" Parent="FK_Client_FeeScheduleId" Name="FeeScheduleId" Position="1">
+<Definition>
+  <referencedColumn>Id</referencedColumn>
+</Definition>
+</changelog.TableComponents>

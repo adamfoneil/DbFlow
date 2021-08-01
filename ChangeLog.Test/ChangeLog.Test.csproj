@@ -9,11 +9,15 @@
   <ItemGroup>
     <None Remove="Resources\Appointment.txt" />
     <None Remove="Resources\Appointment.xml" />
+    <None Remove="Resources\Client.txt" />
+    <None Remove="Resources\Client.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Appointment.txt" />
     <EmbeddedResource Include="Resources\Appointment.xml" />
+    <EmbeddedResource Include="Resources\Client.txt" />
+    <EmbeddedResource Include="Resources\Client.xml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,12 +9,17 @@ namespace ChangeLog.Test
     public class TableDefs
     {
         [TestMethod]
-        public void Appointment()
+        public void Appointment() => TestRenderer("ChangeLog.Test.Resources.Appointment");
+
+        [TestMethod]
+        public void Client() => TestRenderer("ChangeLog.Test.Resources.Client");
+
+        private void TestRenderer(string resourceName)
         {
-            var xml = GetResource("ChangeLog.Test.Resources.Appointment.xml");
+            var xml = GetResource($"{resourceName}.xml");
             var renderer = new TableDefXmlRenderer();
             var actual = renderer.AsText(xml);
-            var expected = GetResource("ChangeLog.Test.Resources.Appointment.txt");
+            var expected = GetResource($"{resourceName}.txt");
             Assert.IsTrue(actual.Equals(expected));
         }
 
