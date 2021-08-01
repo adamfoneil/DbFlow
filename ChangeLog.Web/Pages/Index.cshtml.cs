@@ -1,6 +1,8 @@
 ﻿using ChangeLog.Services;
 using ChangeLog.Services.Queries;
 using ChangeLog.Web.Services;
+using DiffPlex.DiffBuilder;
+using DiffPlex.DiffBuilder.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,14 +17,16 @@ namespace ChangeLog.Web.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly ConnectionProvider _connector;
         private readonly ChangeLogRepository _repository;
+        private readonly ISideBySideDiffBuilder _diffBuilder;
 
         public IndexModel(
             ILogger<IndexModel> logger,
-            ConnectionProvider connector, ChangeLogRepository repository)
+            ConnectionProvider connector, ChangeLogRepository repository, ISideBySideDiffBuilder diffBuilder)
         {
             _logger = logger;
             _connector = connector;
             _repository = repository;
+            _diffBuilder = diffBuilder;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -41,10 +45,9 @@ namespace ChangeLog.Web.Pages
 
         public IEnumerable<RecentObjectsResult> RecentObjects { get; set; }
 
-        public IEnumerable<EventsComparedResult> EventComparison { get; set; }
+        public IEnumerable<RecentChangesResult> RecentChanges { get; set; }
 
-        public EventViewResult PriorEvent { get; set; }
-        public EventViewResult CurrentEvent { get; set; }
+        public SideBySideDiffModel DiffModel { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -58,17 +61,14 @@ namespace ChangeLog.Web.Pages
 
                     if (ObjectId != default)
                     {
-                        EventComparison = await _repository.GetEventComparisonAsync(cn, ObjectId);
+                        RecentChanges = await _repository.GetEventComparisonAsync(cn, ObjectId);
                     }
 
-                    if (PriorEventId != default)
+                    if (PriorEventId != default && CurrentEventId != default)
                     {
-                        PriorEvent = await _repository.GetEventViewAsync(cn, PriorEventId);
-                    }
-
-                    if (CurrentEventId != default)
-                    {
-                        CurrentEvent = await _repository.GetEventViewAsync(cn, CurrentEventId);
+                        var priorVersion = await _repository.GetEventViewAsync(cn, PriorEventId);
+                        var currentVersion = await _repository.GetEventViewAsync(cn, CurrentEventId);                        
+                        DiffModel = _diffBuilder.BuildDiffModel(priorVersion.Content, currentVersion.Content);
                     }
                 }
             }

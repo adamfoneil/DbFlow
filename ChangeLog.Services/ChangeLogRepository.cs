@@ -18,9 +18,9 @@ namespace ChangeLog.Services
         public async Task<IEnumerable<RecentObjectsResult>> GetRecentObjectsAsync(IDbConnection connection) =>
             await new RecentObjects().ExecuteAsync(connection);
 
-        public async Task<IEnumerable<EventsComparedResult>> GetEventComparisonAsync(IDbConnection connection, int objectId)
+        public async Task<IEnumerable<RecentChangesResult>> GetEventComparisonAsync(IDbConnection connection, int objectId)
         {
-            var results = await new EventsCompared() { ObjectId = objectId }.ExecuteAsync(connection);
+            var results = await new RecentChanges() { ObjectId = objectId }.ExecuteAsync(connection);
 
             foreach (var item in results)
             {

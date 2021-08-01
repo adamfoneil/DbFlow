@@ -1,5 +1,7 @@
 using ChangeLog.Services;
 using ChangeLog.Web.Services;
+using DiffPlex;
+using DiffPlex.DiffBuilder;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,9 +22,12 @@ namespace ChangeLog.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
-            services.AddSingleton(new ConnectionProvider(Configuration));
-            services.AddScoped<ChangeLogRepository>();
+            services.AddRazorPages();            
+            services
+                .AddScoped<ChangeLogRepository>()
+                .AddSingleton(new ConnectionProvider(Configuration))                
+                .AddSingleton<ISideBySideDiffBuilder, SideBySideDiffBuilder>()
+                .AddSingleton<IDiffer, Differ>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

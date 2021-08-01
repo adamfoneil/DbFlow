@@ -6,6 +6,7 @@
 
 @section head {
     <link rel="stylesheet" href="~/css/index.css" type="text/css"/>
+    <link rel="stylesheet" href="~/css/diff.css" />
 }
 
 <div id="main">
@@ -28,7 +29,7 @@
                             @if (Model.ObjectId == obj.Id)
                             {
                                 <ul>
-                                    @foreach (var ev in Model.EventComparison)
+                                    @foreach (var ev in Model.RecentChanges)
                                     {
                                         <li>
                                             <a href="?objectId=@obj.Id&connection=@Model.Connection&priorEventId=@ev.PriorEventId&currentEventId=@ev.CurrentEventId">@ev.CurrentTimestamp | version @ev.CurrentVersion</a>
@@ -49,14 +50,14 @@
     </nav>
 
     <article class="m-3" id="comparison-view">
-        @if (Model.PriorEvent != null && Model.CurrentEvent != null)
+        @if (Model.DiffModel != null)
         {
             <div>
-                <partial name="_EventView" model="Model.PriorEvent"/>
+                <partial name="_DiffPane" model="Model.DiffModel.OldText"/>
             </div>
 
             <div>
-                <partial name="_EventView" model="Model.CurrentEvent"/>
+                <partial name="_DiffPane" model="Model.DiffModel.NewText"/>
             </div>
         }
         else

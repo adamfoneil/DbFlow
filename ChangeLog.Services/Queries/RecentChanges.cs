@@ -3,7 +3,7 @@ using System;
 
 namespace ChangeLog.Services.Queries
 {
-    public class EventsComparedResult
+    public class RecentChangesResult
     {
         public string Type { get; set; }
         public DateTime PriorTimestamp { get; set; }
@@ -20,15 +20,11 @@ namespace ChangeLog.Services.Queries
         public int CurrentVersion { get; set; }
         public int PriorEventId { get; set; }
         public int CurrentEventId { get; set; }
-
-        // tables need to get their content from the Table.Text column, not script
-        public string PriorContent => (Type.Equals("TABLE")) ? PriorText : PriorScript;
-        public string CurrentContent => (Type.Equals("TABLE")) ? CurrentText : CurrentScript;
     }
 
-    public class EventsCompared : Query<EventsComparedResult>
+    public class RecentChanges : Query<RecentChangesResult>
     {
-        public EventsCompared() : base(
+        public RecentChanges() : base(
             @"WITH [current] AS (
                 SELECT TOP (20)
                     [obj].[Type], [ev].[Timestamp], [ev].[EventType], [ev].[Schema], [ev].[ObjectName], [ev].[Script], [t].[Xml], [t].[Text], [ev].[Version], [ev].[Id]
