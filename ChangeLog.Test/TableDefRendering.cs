@@ -17,7 +17,7 @@ namespace ChangeLog.Test
         private void TestRenderer(string resourceName)
         {
             var xml = GetResource($"{resourceName}.xml");
-            var renderer = new TableDefXmlRenderer();
+            var renderer = new TableDefRenderer();
             var actual = renderer.AsText(xml);
             var expected = GetResource($"{resourceName}.txt");
             Assert.IsTrue(actual.Equals(expected));

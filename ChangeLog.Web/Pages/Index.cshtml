@@ -4,7 +4,18 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section head {
+    <link rel="stylesheet" href="~/css/index.css" type="text/css"/>
+}
+
+<div id="main">
+    <nav class="m-3">
+        <form method="get">
+            @Html.DropDownList("ConnectionName", Model.ConnectionSelect, string.Empty, new { @class = "form-control"})
+        </form>
+    </nav>
+    <article class="m-3">
+        <p>This is the main body</p>
+    </article>
 </div>
+

@@ -1,0 +1,11 @@
+﻿#main {
+    display:flex
+}
+
+#main nav {
+    min-width:350px;    
+}
+
+#main article {
+    width:100%
+}

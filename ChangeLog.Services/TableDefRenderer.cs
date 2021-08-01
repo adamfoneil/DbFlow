@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace ChangeLog.Web.Services
 {
-    public class TableDefXmlRenderer
+    public class TableDefRenderer
     {
         /// <summary>
         /// converts the XML returned by table function changelog.TableComponents
