@@ -52,7 +52,7 @@ namespace ChangeLogUtil
             Func<string, IEnumerable<DataRow>, string> parseDefinition, 
             ILookup<string, DataRow> byParent = null)
         {
-            output.AppendLine($"{heading} ({componentRows.Count()})");
+            output.AppendLine($"{heading} ({componentRows.Count()}):");
 
             foreach (var row in componentRows.OrderBy(row => row.Field<int?>("Position")))
             {
@@ -122,13 +122,25 @@ namespace ChangeLogUtil
         {
             var properties = xml.ToDictionary();
 
-            var result = $"=> {properties["referencedSchema"]}.{properties["referencedTable"]}:";
+            var result = $"=> {properties["referencedSchema"]}.{properties["referencedTable"]}";
 
-            result += string.Join(" + ", childRows.OrderBy(row => row.Field<int?>("Position")).Select(row =>
+            if (properties["cascadeUpdate"].Equals("true"))
+            {
+                result += " update";
+            }
+
+            if (properties["cascadeDelete"].Equals("true"))
+            {
+                result += "delete";
+            }
+
+            result += "\r\n";
+
+            foreach (var row in childRows.OrderBy(row => row.Field<int?>("Position")))
             {
                 var columnProps = row.Field<string>("Definition").ToDictionary();
-                return $"{row.Field<string>("Name")} => {columnProps["referencedColumn"]}";
-            }));
+                result += $"    {row.Field<string>("Name")} => {columnProps["referencedColumn"]}";
+            }
 
             return result;
         }
