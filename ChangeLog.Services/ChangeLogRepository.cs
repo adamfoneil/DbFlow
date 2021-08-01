@@ -49,8 +49,7 @@ namespace ChangeLog.Services
 
             return result;
         }
-            
-        
+
         private async Task<string> RenderTableTextAsync(IDbConnection connection, int eventId, string xml)
         {
             var text = _renderer.AsText(xml);

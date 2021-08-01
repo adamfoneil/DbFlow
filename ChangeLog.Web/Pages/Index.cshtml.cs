@@ -12,15 +12,15 @@ namespace ChangeLog.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;        
+        private readonly ILogger<IndexModel> _logger;
         private readonly ConnectionProvider _connector;
         private readonly ChangeLogRepository _repository;
 
         public IndexModel(
-            ILogger<IndexModel> logger, 
+            ILogger<IndexModel> logger,
             ConnectionProvider connector, ChangeLogRepository repository)
         {
-            _logger = logger;            
+            _logger = logger;
             _connector = connector;
             _repository = repository;
         }
@@ -70,7 +70,7 @@ namespace ChangeLog.Web.Pages
                     {
                         CurrentEvent = await _repository.GetEventViewAsync(cn, CurrentEventId);
                     }
-                }   
+                }
             }
         }
     }

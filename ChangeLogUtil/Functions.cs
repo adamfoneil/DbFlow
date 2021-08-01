@@ -18,7 +18,7 @@ namespace ChangeLogUtil
             {
                 var output = GetTextTableDefinition(cn, schema, name);
                 SqlContext.Pipe.Send(output);
-            }            
+            }
         }
 
         public static string GetTextTableDefinition(SqlConnection cn, string schema, string name)
@@ -45,11 +45,11 @@ namespace ChangeLogUtil
                 return output.ToString();
             }
         }
-       
+
         private static void AddItems(
-            StringBuilder output, string heading, 
-            IEnumerable<DataRow> componentRows, 
-            Func<string, IEnumerable<DataRow>, string> parseDefinition, 
+            StringBuilder output, string heading,
+            IEnumerable<DataRow> componentRows,
+            Func<string, IEnumerable<DataRow>, string> parseDefinition,
             ILookup<string, DataRow> byParent = null)
         {
             output.AppendLine($"{heading} ({componentRows.Count()}):");
@@ -101,7 +101,7 @@ namespace ChangeLogUtil
             {
                 result += " identity";
             }
-            
+
             var nullable = (properties["nullable"].Equals("true")) ? "NULL" : "NOT NULL";
             result += " " + nullable;
 
@@ -154,9 +154,9 @@ namespace ChangeLogUtil
                 (properties["uniqueConstraint"].Equals("true")) ? "unique constraint" :
                 (properties["unique"].Equals("true")) ? "unique" :
                 string.Empty;
-            
+
             result += (properties["type"].Equals("clustered")) ? " clustered" : " nonclustered";
-            
+
             if (properties["disabled"].Equals("true"))
             {
                 result += " DISABLED";

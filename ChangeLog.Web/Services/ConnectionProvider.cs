@@ -12,7 +12,7 @@ namespace ChangeLog.Web.Services
 
         public ConnectionProvider(IConfiguration config)
         {
-            _connections = new Dictionary<string, string>();            
+            _connections = new Dictionary<string, string>();
             var section = config.GetSection("ConnectionStrings");
             foreach (var child in section.GetChildren()) _connections.Add(child.Key, child.Value);
         }
@@ -20,6 +20,6 @@ namespace ChangeLog.Web.Services
         public IEnumerable<string> ConnectionNames => _connections.Select(kp => kp.Key);
 
         public IDbConnection GetConnection(string name) => new SqlConnection(_connections[name]);
-        
+
     }
 }

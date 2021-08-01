@@ -13,9 +13,9 @@ namespace ChangeLog.Services
         /// to a more readable text format for diff display        
         /// </summary>
         public string AsText(string xml)
-        {            
+        {
             var doc = XDocument.Parse("<root>" + xml + "</root>");
-            var tableComponents = doc.Root.Elements().Select(ele => 
+            var tableComponents = doc.Root.Elements().Select(ele =>
             {
                 var props = ElementDictionary(ele);
                 return new TableComponentResult()
@@ -51,7 +51,7 @@ namespace ChangeLog.Services
             output.AppendLine($"{heading} ({componentRows.Count()}):");
 
             foreach (var row in componentRows.OrderBy(row => row.Position))
-            {                        
+            {
                 var childRows = byParent?.Contains(row.Name) ?? false ? byParent[row.Name] : Enumerable.Empty<TableComponentResult>();
                 output.AppendLine($"  [{row.Name}] {parseDefinition(row.Definition, childRows)}");
             }
@@ -128,7 +128,7 @@ namespace ChangeLog.Services
             result += "\r\n";
 
             foreach (var row in childRows.OrderBy(row => row.Position))
-            {                
+            {
                 result += $"    {row.Name} => {row.Definition["referencedColumn"]}";
             }
 
@@ -160,7 +160,7 @@ namespace ChangeLog.Services
             result += "\r\n";
 
             foreach (var row in childRows)
-            {                
+            {
                 result += $"    {row.Name} {row.Definition["sort"]}";
             }
 
@@ -172,7 +172,7 @@ namespace ChangeLog.Services
             return properties["expression"];
         }
 
-        private static Dictionary<string, string> ElementDictionary(XElement element) => element            
+        private static Dictionary<string, string> ElementDictionary(XElement element) => element
             .Descendants()
             .Where(ele => !ele.IsEmpty)
             .ToDictionary(ele => ele.Name.LocalName, ele => ele.Value);
