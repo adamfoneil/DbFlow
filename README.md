@@ -1,4 +1,4 @@
-This is an approach to tracking changes to SQL Server objects automatically using several components you must create in a database:
+This is an approach to tracking changes to SQL Server objects automatically using several components you create in a database:
 
 - some [tables](https://github.com/adamfoneil/ChangeLogUtil/blob/master/Tables.sql),
 - a [table function](https://github.com/adamfoneil/ChangeLogUtil/blob/master/TableComponents.sql), and a 
