@@ -1,8 +1,10 @@
-﻿@model DiffPlex.DiffBuilder.Model.DiffPaneModel
+﻿@model ChangeLog.Web.ViewModels.ObjectVersion
+
+<h5>version @Model.EventView.Version</h5>
 
 <div class="diffPane">
     <table cellpadding="0" cellspacing="0" class="diffTable">
-        @foreach (var diffLine in Model.Lines)
+        @foreach (var diffLine in Model.PaneModel.Lines)
         {
         <tr>
             <td class="lineNumber">

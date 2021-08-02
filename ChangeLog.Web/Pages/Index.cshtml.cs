@@ -48,6 +48,8 @@ namespace ChangeLog.Web.Pages
         public IEnumerable<RecentChangesResult> RecentChanges { get; set; }
 
         public SideBySideDiffModel DiffModel { get; set; }
+        public EventViewResult PriorVersion { get; set; }
+        public EventViewResult CurrentVersion { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -66,9 +68,9 @@ namespace ChangeLog.Web.Pages
 
                     if (PriorEventId != default && CurrentEventId != default)
                     {
-                        var priorVersion = await _repository.GetEventViewAsync(cn, PriorEventId);
-                        var currentVersion = await _repository.GetEventViewAsync(cn, CurrentEventId);                        
-                        DiffModel = _diffBuilder.BuildDiffModel(priorVersion.Content, currentVersion.Content);
+                        PriorVersion = await _repository.GetEventViewAsync(cn, PriorEventId);
+                        CurrentVersion = await _repository.GetEventViewAsync(cn, CurrentEventId);                        
+                        DiffModel = _diffBuilder.BuildDiffModel(PriorVersion.Content, CurrentVersion.Content);
                     }
                 }
             }

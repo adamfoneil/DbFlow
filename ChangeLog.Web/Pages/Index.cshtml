@@ -53,11 +53,11 @@
         @if (Model.DiffModel != null)
         {
             <div>
-                <partial name="_DiffPane" model="Model.DiffModel.OldText"/>
+                <partial name="_DiffPane" model="@(new ChangeLog.Web.ViewModels.ObjectVersion() { PaneModel = Model.DiffModel.OldText, EventView = Model.PriorVersion })"/>
             </div>
 
             <div>
-                <partial name="_DiffPane" model="Model.DiffModel.NewText"/>
+                <partial name="_DiffPane" model="@(new ChangeLog.Web.ViewModels.ObjectVersion() { PaneModel = Model.DiffModel.NewText, EventView = Model.CurrentVersion })"/>
             </div>
         }
         else
