@@ -12,7 +12,7 @@ You can then view the history of changes to the object with a little [Razor Page
 
 ![image](https://user-images.githubusercontent.com/4549398/127789297-5bda234a-72a7-423d-a685-54e580ede26c.png)
 
-This uses [DiffPlex](https://github.com/mmanela/diffplex) to achieve the diff view. Amazing project!
+This uses [DiffPlex](https://github.com/mmanela/diffplex) to achieve the diff view, which is awesome!
 
 ## Why?
 Source control of database objects is a notoriously fraught subject because database objects don't play nicely as ordinary source code. There are lots of solutions out there already for this, but I wanted to see what could be achieved using a reactive, **tracking** mindset instead of a **control** mindset.
