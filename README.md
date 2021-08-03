@@ -18,7 +18,7 @@ This uses [DiffPlex](https://github.com/mmanela/diffplex) to achieve the diff vi
 Source control of database objects is a fraught subject because database objects don't play nicely as ordinary source code. There are lots of solutions out there already for this, but I wanted to see what could be achieved using a reactive, **tracking** mindset instead of a **control** mindset. I believe that reliable, visible change tracking removes the need to maintain a separate code repository of database objects. The database itself is the "source of truth." But historically what's been missing is a continuous diff view of changes over the lifetime of objects. This is the feature gap this project fills.
 
 ## Limitations
-With Windows logins enabled, it's easy to tell who made a change to an object. However, in an environment where a shared account is used, as may be likely in Azure SQL Database, for example, you'd wouldn't have good visibility on who's making changes.
+With Windows logins enabled, it's easy to tell who made a change to an object, since that is [tracked](https://github.com/adamfoneil/ChangeLogUtil/blob/master/Tables.sql#L9). However, in an environment where a shared account is used, as may be likely in Azure SQL Database, for example, you'd wouldn't have good visibility on who's making changes.
 
 ## Points of Interest
 - My DDL trigger was adapted from [this example](https://docs.microsoft.com/en-us/sql/t-sql/functions/eventdata-transact-sql?view=sql-server-ver15#b-creating-a-log-table-with-event-data-in-a-ddl-trigger) from Microsoft's documentation.
