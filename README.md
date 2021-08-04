@@ -27,4 +27,11 @@ With Windows logins enabled, it's easy to tell who made a change to an object, s
 
 - The [Index](https://github.com/adamfoneil/ChangeLogUtil/blob/master/ChangeLog.Web/Pages/Index.cshtml) page in the web app uses [ChangeLogRepository](https://github.com/adamfoneil/ChangeLogUtil/blob/master/ChangeLog.Services/ChangeLogRepository.cs) to query the change log data.
 
-- The connections available to the web app are regular connection strings in [appsettings.json](https://github.com/adamfoneil/ChangeLogUtil/blob/master/ChangeLog.Web/appsettings.json#L2-L5). I imagine you'd host this in a private domain so I use Windows authentication for the app.
+- The connections available to the web app are regular connection strings in [appsettings.json](https://github.com/adamfoneil/ChangeLogUtil/blob/master/ChangeLog.Web/appsettings.json#L2-L5). I imagine you'd host this in a private domain so I use Windows authentication for this app.
+
+# What's Next?
+In a typical workflow, you need to migrate objects across environments -- typically at minimum from QA to production. This involves comparing objects between databases and migrating select changes, usually changes related to a pull request. So, I envision the next phase of this adding the ability to compare and migrate objects across connections.
+
+There are several fine database object comparison apps out there. I have a library of my own, [ModelSync](https://github.com/adamfoneil/ModelSync), but it's not fully ready for the use case I imagine here. (I have an [open issue](https://github.com/adamfoneil/ModelSync/issues/16) on the feature gaps.)
+
+
