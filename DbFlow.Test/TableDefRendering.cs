@@ -3,16 +3,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Reflection;
 
-namespace ChangeLog.Test
+namespace DbFlow.Test
 {
     [TestClass]
     public class TableDefs
     {
         [TestMethod]
-        public void Appointment() => TestRenderer("ChangeLog.Test.Resources.Appointment");
+        public void Appointment() => TestRenderer("DbFlow.Test.Resources.Appointment");
 
         [TestMethod]
-        public void Client() => TestRenderer("ChangeLog.Test.Resources.Client");
+        public void Client() => TestRenderer("DbFlow.Test.Resources.Client");
 
         private void TestRenderer(string resourceName)
         {
