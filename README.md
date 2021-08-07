@@ -7,7 +7,7 @@ This is a SQL Server source control solution that you host as a Razor Pages web 
 
 - A web app that offers
   - diff view of changes to database objects, powered by [DiffPlex](https://github.com/mmanela/diffplex)
-  - a pull request workflow for requesting, approving, and deploying database changes (not built yet, this is the roadmap!)
+  - a pull request workflow for requesting, approving, and deploying database changes from one environment to another (not built yet, this is the roadmap!)
 
 Once implemented, executing a DDL create or alter statement on any object, for example:
 
