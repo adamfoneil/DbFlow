@@ -1,10 +1,15 @@
-This is an approach to tracking changes to SQL Server objects automatically using several components you create in a database:
+This is a SQL Server source control solution that you host as a Razor Pages web app. There are two parts:
 
-- some [tables](https://github.com/adamfoneil/ChangeLogUtil/blob/master/Tables.sql),
-- a [table function](https://github.com/adamfoneil/ChangeLogUtil/blob/master/TableComponents.sql), and a 
-- a [DDL trigger](https://github.com/adamfoneil/ChangeLogUtil/blob/master/Trigger.sql)
+- DDL trigger components that log ongoing changes in your databases:
+  - the [trigger](https://github.com/adamfoneil/ChangeLogUtil/blob/master/Trigger.sql) itself
+  - a set of [tables](https://github.com/adamfoneil/ChangeLogUtil/blob/master/Tables.sql)
+  - a [table function](https://github.com/adamfoneil/ChangeLogUtil/blob/master/TableComponents.sql)
 
-Once implemented, when you execute a DDL create or alter statement on any object, for example:
+- A web app that offers
+  - diff view of changes to database objects, powered by [DiffPlex](https://github.com/mmanela/diffplex)
+  - a pull request workflow for requesting, approving, and deploying database changes (not built yet, this is the roadmap!)
+
+Once implemented, executing a DDL create or alter statement on any object, for example:
 
 ![image](https://user-images.githubusercontent.com/4549398/127789248-29c52b3c-64db-4abd-b737-0b1eb34737f3.png)
 
@@ -12,7 +17,6 @@ You can then view the history of changes to the object with a little [Razor Page
 
 ![image](https://user-images.githubusercontent.com/4549398/127789297-5bda234a-72a7-423d-a685-54e580ede26c.png)
 
-This uses [DiffPlex](https://github.com/mmanela/diffplex) to achieve the diff view, which is awesome!
 
 ## Why?
 Source control of database objects is a fraught subject because database objects don't play nicely as ordinary source code. There are lots of solutions out there already for this, but I wanted to see what could be achieved using a reactive, **tracking** mindset instead of a **control** mindset. I believe that reliable, visible change tracking removes the need to maintain a separate code repository of database objects. The database itself is the "source of truth." But historically what's been missing is a continuous diff view of changes over the lifetime of objects. This is the feature gap this project fills.
