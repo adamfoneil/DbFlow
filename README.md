@@ -5,9 +5,9 @@ This is a SQL Server source control solution that you host as a Razor Pages web 
   - a set of [tables](https://github.com/adamfoneil/ChangeLogUtil/blob/master/Tables.sql)
   - a [table function](https://github.com/adamfoneil/ChangeLogUtil/blob/master/TableComponents.sql)
 
-- A web app that offers
+- A [web app](https://github.com/adamfoneil/DbFlow/tree/master/ChangeLog.Web) that offers
   - diff view of changes to database objects, powered by [DiffPlex](https://github.com/mmanela/diffplex)
-  - a pull request workflow for requesting, approving, and deploying database changes from one environment to another (not built yet, this is the roadmap!)
+  - **coming soon:** a pull request workflow for requesting, approving, and deploying database changes from one environment to another
 
 Once implemented, executing a DDL create or alter statement on any object, for example:
 
