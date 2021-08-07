@@ -1,0 +1,17 @@
+{
+  "ConnectionStrings": {
+    "Hs5.dev": "Server=(localdb)\\mssqllocaldb;Database=Hs5;Integrated Security=true",
+    "Hs5.prod": "Server=(localdb)\\mssqllocaldb;Database=Hs5Prod;Integrated Security=true",
+    "BlazorAO": "Server=(localdb)\\mssqllocaldb;Database=BlazorAO;Integrated Security=true",
+    "AH4": "Server=(localdb)\\mssqllocaldb;Database=AerieHub4;Integrated Security=true"
+  },
+  "MigrationRoutes": [
+    {
+      "Name": "Hs5",
+      "Source": "Hs5.dev",
+      "Targets": [
+        "Hs5.prod"
+      ]
+    }    
+  ]  
+}
