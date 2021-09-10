@@ -35,7 +35,8 @@ BEGIN
 		[col].[object_id]=[def].[parent_object_id] AND
 		[col].[column_id]=[def].[parent_column_id]
 	WHERE 
-		[col].[object_id]=@objectId
+		[col].[object_id]=@objectId AND
+		[col].[Name] IS NOT NULL
 
 	-- indexes
 	INSERT INTO @results (
@@ -54,7 +55,8 @@ BEGIN
 	FROM
 		[sys].[indexes] [ndx]
 	WHERE
-		[ndx].[object_id]=@objectId
+		[ndx].[object_id]=@objectId AND
+		[ndx].[Name] IS NOT NULL
 
 	-- index columns
 	INSERT INTO @results (
