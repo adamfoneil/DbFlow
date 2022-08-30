@@ -1,4 +1,4 @@
-﻿CREATE TRIGGER [TR_OnDDL_Event] ON DATABASE 
+CREATE TRIGGER [TR_OnDDL_Event] ON DATABASE 
 FOR DDL_DATABASE_LEVEL_EVENTS   
 AS  
 DECLARE @data XML = EVENTDATA()
@@ -15,7 +15,7 @@ WHERE [Schema]=@schema AND [Name]=@objectName
 IF @version IS NULL
 BEGIN
 	INSERT INTO [changelog].[Object] ([Schema], [Name], [Type], [Version])
-	VALUES (@schema, @objectName, @objectType, 0)
+	VALUES (ISNULL(@schema, 'n/a'), @objectName, @objectType, 0)
 	SET @version = 0
 END
 
@@ -34,7 +34,7 @@ BEGIN
 	INSERT INTO [changelog].[Event] (
 		[EventType], [UserName], [Schema], [ObjectName], [Script], [Version]
 	) VALUES (
-		@eventType, @userName, @schema, @objectName, @script, @version
+		@eventType, @userName, ISNULL(@schema, 'n/a'), @objectName, @script, @version
 	)
 
 	DECLARE @eventId int
